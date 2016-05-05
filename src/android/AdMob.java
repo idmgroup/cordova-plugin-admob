@@ -30,7 +30,6 @@ import java.util.Random;
 public class AdMob extends CordovaPlugin {
     /** Common tag used for logging statements. */
     private static final String LOGTAG = "AdMob";
-    private static final String DEFAULT_PUBLISHER_ID = "ca-app-pub-6869992474017983/9375997553";
 
     private static final boolean CORDOVA_MIN_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
 
@@ -67,9 +66,9 @@ public class AdMob extends CordovaPlugin {
     /** The interstitial ad to display to the user. */
     private InterstitialAd interstitialAd;
 
-    private String publisherId = DEFAULT_PUBLISHER_ID;
+    private String publisherId;
     private AdSize adSize = AdSize.SMART_BANNER;
-    private String interstialAdId = DEFAULT_PUBLISHER_ID;
+    private String interstialAdId;
     /** Whether or not the ad should be positioned at top or bottom of screen. */
     private boolean bannerAtTop = false;
     /** Whether or not the banner will overlap the webview instead of push it up or down */
@@ -187,8 +186,6 @@ public class AdMob extends CordovaPlugin {
         this.setOptions( options );
         autoShowBanner = autoShow;
 
-        if(this.publisherId.length() == 0) this.publisherId = DEFAULT_PUBLISHER_ID;
-
         cordova.getActivity().runOnUiThread(new Runnable(){
             @Override
             public void run() {
@@ -257,7 +254,6 @@ public class AdMob extends CordovaPlugin {
         autoShowInterstitial = autoShow;
 
         if(this.interstialAdId.length() == 0) this.interstialAdId = this.publisherId;
-        if(this.interstialAdId.length() == 0) this.interstialAdId = DEFAULT_PUBLISHER_ID;
 
         final CallbackContext delayCallback = callbackContext;
         cordova.getActivity().runOnUiThread(new Runnable(){
