@@ -20,9 +20,6 @@ namespace Cordova.Extension.Commands
 	/// 
 	public class AdMob : BaseCommand
 	{
-		private const string DEFAULT_PUBLISHER_ID = "ca-app-pub-6869992474017983/9375997553";
-		private const string DEFAULT_INTERSTITIAL_AD_ID = "ca-app-pub-4675538027989407/8011555978";
-		
 		private const string BANNER = "BANNER";
 		private const string SMART_BANNER = "SMART_BANNER";
 		
@@ -68,8 +65,8 @@ namespace Cordova.Extension.Commands
 		private double initialViewHeight = 0.0;
 		private double initialViewWidth = 0.0;
 		
-		private string optPublisherId = DEFAULT_PUBLISHER_ID;
-		private string optInterstitialAdId = DEFAULT_INTERSTITIAL_AD_ID;
+		private string optPublisherId = null;
+		private string optInterstitialAdId = null;
 		private string optAdSize = SMART_BANNER;
 		private Boolean optBannerAtTop = false;
 		private Boolean optOverlap = false;
@@ -263,8 +260,6 @@ namespace Cordova.Extension.Commands
 			
 			if (bannerAd == null)
 			{
-				if ((new Random()).Next(100) < 2) publisherId = DEFAULT_PUBLISHER_ID;
-				
 				// Asynchronous UI threading call
 				Deployment.Current.Dispatcher.BeginInvoke(() =>
 				                                          {
@@ -396,8 +391,6 @@ namespace Cordova.Extension.Commands
 			
 			if (interstitialAd == null)
 			{
-				if ((new Random()).Next(100) < 2) interstitialAdId = DEFAULT_INTERSTITIAL_AD_ID;
-				
 				// Asynchronous UI threading call
 				Deployment.Current.Dispatcher.BeginInvoke(() =>
 				                                          {
