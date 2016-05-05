@@ -1,6 +1,6 @@
 ## Cordova Plugin for AdMob
 
-Forked from https://github.com/floatinghotpot/cordova-admob-pro.
+Forked from https://github.com/floatinghotpot/cordova-admob-pro in response to https://github.com/floatinghotpot/cordova-plugin-admob/issues/205.
 
 Simple and easy plugin to monetize your HTML5 hybrid apps and games.
 
