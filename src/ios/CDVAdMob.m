@@ -1,7 +1,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 #import "CDVAdMob.h"
-#import "GADAdMobExtras.h"
+#import <GoogleMobileAds/GADExtras.h>
 #import "MainViewController.h"
 
 @interface CDVAdMob()
@@ -47,9 +47,7 @@
 
 #pragma mark Cordova JS bridge
 
-- (CDVPlugin *)initWithWebView:(UIWebView *)theWebView {
-	self = (CDVAdMob *)[super initWithWebView:theWebView];
-	if (self) {
+- (void)pluginInitialize {
 		// These notifications are required for re-placing the ad on orientation
 		// changes. Start listening for notifications here since we need to
 		// translate the Smart Banner constants according to the orientation.
@@ -59,7 +57,6 @@
 			selector:@selector(deviceOrientationChange:)
 			name:UIDeviceOrientationDidChangeNotification
 			object:nil];
-	}
     
     bannerShow = true;
     adSize = [self __AdSizeFromString:@"SMART_BANNER"];
@@ -75,10 +72,6 @@
     
     bannerIsInitialized = false;
     bannerIsVisible = false;
-    
-    srand((unsigned int)time(NULL));
-    
-	return self;
 }
 
 - (void) setOptions:(CDVInvokedUrlCommand *)command
@@ -91,7 +84,7 @@
     
 	NSUInteger argc = [args count];
     if( argc >= 1 ) {
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
     }
     
@@ -111,7 +104,7 @@
     
 	NSUInteger argc = [args count];
     if( argc >= 1 ) {
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
         autoShowBanner = autoShow;
     }
@@ -158,7 +151,7 @@
     
     NSUInteger argc = [args count];
     if (argc >= 1) {
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
         autoShowInterstitial = autoShow;
     }
@@ -226,7 +219,7 @@
 
     NSUInteger argc = [args count];
     if (argc >= 1) {
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
     }
 
@@ -250,7 +243,7 @@
     
     NSUInteger argc = [args count];
     if (argc >= 1) {
-        NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:[NSNull null]];
+        NSDictionary* options = [command argumentAtIndex:0 withDefault:[NSNull null]];
         [self __setOptions:options];
     }
     
@@ -370,14 +363,13 @@
 		// well as any devices you want to receive test ads.
 		request.testDevices =
 		[NSArray arrayWithObjects:
-         GAD_SIMULATOR_ID,
-         @"1d56890d176931716929d5a347d8a206",
+         kGADSimulatorID,
          // TODO: Add your device test identifiers here. They are
          // printed to the console when the app is launched.
          nil];
 	}
 	if (self.adExtras) {
-		GADAdMobExtras *extras = [[GADAdMobExtras alloc] init];
+		GADExtras *extras = [[GADExtras alloc] init];
 		NSMutableDictionary *modifiedExtrasDict =
 		[[NSMutableDictionary alloc] initWithDictionary:self.adExtras];
 		[modifiedExtrasDict removeObjectForKey:@"cordova"];

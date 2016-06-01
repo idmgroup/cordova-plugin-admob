@@ -2,11 +2,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import "GADAdSize.h"
-#import "GADBannerView.h"
-#import "GADInterstitial.h"
-#import "GADBannerViewDelegate.h"
-#import "GADInterstitialDelegate.h"
+#import <GoogleMobileAds/GADAdSize.h>
+#import <GoogleMobileAds/GADBannerView.h>
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADBannerViewDelegate.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 
 #pragma mark - JS requestAd options
 
